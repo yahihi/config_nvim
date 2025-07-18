@@ -1,0 +1,72 @@
+*openai-setup.txt*  OpenAI API設定ガイド
+
+==============================================================================
+CONTENTS                                            *openai-setup-contents*
+
+1. セットアップ手順.....................|openai-setup-steps|
+2. APIキーの設定.......................|openai-setup-apikey|
+3. モデルの選択........................|openai-setup-models|
+4. トラブルシューティング..............|openai-setup-troubleshooting|
+
+==============================================================================
+1. セットアップ手順                                  *openai-setup-steps*
+
+1. OpenAI APIキーを取得:
+   https://platform.openai.com/api-keys
+
+2. 環境変数を設定:
+   
+   Bashの場合 (~/.bashrc):
+   export OPENAI_API_KEY="sk-..."
+   
+   Fishの場合 (~/.config/fish/config.fish):
+   set -x OPENAI_API_KEY "sk-..."
+
+3. Neovimを再起動
+
+4. 動作確認:
+   - <leader>aa で質問モード
+   - <leader>ae で編集モード
+
+==============================================================================
+2. APIキーの設定                                    *openai-setup-apikey*
+
+APIキーは以下の優先順位で読み込まれます:
+
+1. 環境変数 OPENAI_API_KEY
+2. ~/.config/openai/api_key ファイル
+3. Neovim内で :AvanteSetOpenAIKey コマンド
+
+セキュリティのため、環境変数の使用を推奨します。
+
+==============================================================================
+3. モデルの選択                                    *openai-setup-models*
+
+利用可能なモデル:
+
+- gpt-4o-mini (推奨、高速・低コスト)
+- gpt-3.5-turbo (旧標準モデル)
+- gpt-4o (最新・高性能)
+- gpt-4-turbo (高性能・高コスト)
+
+設定変更:
+~/.config/nvim/lua/plugins/avante-openai.lua の
+model = "gpt-4o-mini" を編集
+
+==============================================================================
+4. トラブルシューティング              *openai-setup-troubleshooting*
+
+**APIキーエラー:**
+- 環境変数が設定されているか確認
+  :echo $OPENAI_API_KEY
+  
+**接続エラー:**
+- インターネット接続を確認
+- プロキシ設定が必要な場合は HTTPS_PROXY を設定
+
+**料金について:**
+- https://openai.com/pricing で確認
+- gpt-4o-mini が最もコスト効率的
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:

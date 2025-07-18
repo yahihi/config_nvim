@@ -1,0 +1,42 @@
+-- シンプルなOllama用設定
+return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    opts = {
+      provider = "ollama",
+      providers = {
+        ollama = {
+          ["local"] = true,
+          endpoint = "127.0.0.1:11434/v1/chat/completions",
+          model = "codellama",
+          parse_curl_args = function(opts, code_opts)
+            return {
+              url = opts.endpoint,
+              headers = {
+                ["Accept"] = "application/json",
+                ["Content-Type"] = "application/json",
+              },
+              body = vim.tbl_deep_extend("force", {
+                model = opts.model,
+                messages = require("avante.providers").openai.parse_messages(code_opts),
+                stream = true,
+              }, opts.extra_request_body or {}),
+            }
+          end,
+        },
+      },
+    },
+    build = "make",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Avante Ask" },
+      { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Avante Edit", mode = { "n", "v" } },
+      { "<leader>at", "<cmd>AvanteToggle<cr>", desc = "Avante Toggle" },
+    },
+  },
+}

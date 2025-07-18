@@ -1,0 +1,39 @@
+# Lazy.nvim
+lazy-lock.json
+
+# ビルド成果物
+build/
+*.so
+*.dylib
+
+# ログファイル
+*.log
+
+# Neovim
+.netrwhist
+Session.vim
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 環境設定
+.env
+.env.local
+
+# AIツール設定
+.claude
+.codeium
+.aider*
+.cursorrules
+
+# 個人設定
+personal/
+local/
+
+# 一時ファイル
+tmp/
+temp/

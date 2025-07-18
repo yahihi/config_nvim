@@ -1,0 +1,47 @@
+-- 最小限の設定（ダミーキー使用）
+return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    init = function()
+      -- ダミーのAPIキーを設定（ローカルLLM用）
+      vim.env.OPENAI_API_KEY = vim.env.OPENAI_API_KEY or "dummy-local-llm"
+    end,
+    opts = {
+      provider = "ollama",
+      providers = {
+        ollama = {
+          ["local"] = true,
+          endpoint = "http://localhost:11434",
+          model = "codellama:7b",  -- ダウンロードしたモデル名
+          parse_curl_args = function(opts, code_opts)
+            return {
+              url = opts.endpoint .. "/api/chat",
+              headers = {
+                ["Content-Type"] = "application/json",
+              },
+              body = vim.tbl_deep_extend("force", {
+                model = opts.model,
+                messages = require("avante.providers").ollama.parse_messages(code_opts),
+                stream = true,
+              }, opts.extra_request_body or {}),
+            }
+          end,
+        },
+      },
+    },
+    build = "make",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Avante Ask" },
+      { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Avante Edit", mode = { "n", "v" } },
+      { "<leader>at", "<cmd>AvanteToggle<cr>", desc = "Avante Toggle" },
+      { "<F4>", "<cmd>AvanteToggle<cr>", desc = "Avante Toggle" },
+    },
+  },
+}

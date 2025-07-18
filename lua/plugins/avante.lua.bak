@@ -1,0 +1,167 @@
+return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false,
+    opts = {
+      -- プロバイダー選択
+      provider = "openai",  -- ローカルLLM用にOpenAI互換を使用
+      auto_suggestions_provider = "openai",
+      
+      -- 新しいプロバイダー設定形式
+      providers = {
+        openai = {
+          endpoint = "http://localhost:1234/v1",  -- LM Studio用
+          model = "local-model",
+          api_key_name = "OPENAI_API_KEY",
+          parse_curl_args = function(opts, code_opts)
+            return {
+              url = opts.endpoint .. "/chat/completions",
+              headers = {
+                ["Accept"] = "application/json",
+                ["Content-Type"] = "application/json",
+                ["Authorization"] = "Bearer dummy-key-for-lm-studio",
+              },
+              body = vim.tbl_deep_extend("force", {
+                model = opts.model,
+                messages = require("avante.providers").openai.parse_messages(code_opts),
+                stream = true,
+              }, opts.extra_request_body),
+            }
+          end,
+        },
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-sonnet-20241022",
+          api_key_name = "ANTHROPIC_API_KEY",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 4096,
+          },
+        },
+        copilot = {
+          endpoint = "https://api.githubcopilot.com",
+          model = "gpt-4",
+          api_key_name = "COPILOT_API_KEY",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 4096,
+          },
+        },
+        cohere = {
+          endpoint = "https://api.cohere.ai/v1",
+          model = "command-r-plus",
+          api_key_name = "COHERE_API_KEY",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 4096,
+          },
+        },
+        gemini = {
+          endpoint = "https://generativelanguage.googleapis.com/v1beta",
+          model = "gemini-1.5-flash",
+          api_key_name = "GEMINI_API_KEY",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 4096,
+          },
+        },
+      },
+      behaviour = {
+        auto_suggestions = false,
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+      },
+      mappings = {
+        --- @class AvanteConflictMappings
+        diff = {
+          ours = "co",
+          theirs = "ct",
+          all_theirs = "ca",
+          both = "cb",
+          cursor = "cc",
+          next = "]x",
+          prev = "[x",
+        },
+        suggestion = {
+          accept = "<M-l>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+        jump = {
+          next = "]]",
+          prev = "[[",
+        },
+        submit = {
+          normal = "<CR>",
+          insert = "<C-s>",
+        },
+        sidebar = {
+          switch_windows = "<Tab>",
+          reverse_switch_windows = "<S-Tab>",
+        },
+      },
+      hints = { enabled = true },
+      windows = {
+        position = "right",
+        wrap = true,
+        width = 30,
+        sidebar_header = {
+          align = "center",
+          rounded = true,
+        },
+      },
+      highlights = {
+        diff = {
+          current = "DiffText",
+          incoming = "DiffAdd",
+        },
+      },
+      diff = {
+        autojump = true,
+        list_opener = "copen",
+      },
+    },
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons",
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+    keys = {
+      { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Avante Ask" },
+      { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Avante Edit", mode = { "n", "v" } },
+      { "<leader>at", "<cmd>AvanteToggle<cr>", desc = "Avante Toggle" },
+      { "<F4>", "<cmd>AvanteToggle<cr>", desc = "Avante Toggle" },
+      { "<leader>ac", "<cmd>AvanteClear<cr>", desc = "Avante Clear" },
+      { "<leader>am", "<cmd>AvanteModel<cr>", desc = "Avante Model" },
+    },
+  },
+}

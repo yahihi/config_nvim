@@ -1,0 +1,296 @@
+*my-keybindings.txt*   私のNeovimキーバインド       最終更新: 2025年1月17日
+
+私のNeovimキーバインド（2025年版）
+
+==============================================================================
+目次                                                    *my-keybindings-contents*
+
+1. ファイルナビゲーション.................|my-keybindings-file-nav|
+2. ファイル内ナビゲーション...............|my-keybindings-in-file-nav|
+3. 編集...................................|my-keybindings-edit|
+4. 調査・コード解析......................|my-keybindings-investigate|
+5. AI支援機能............................|my-keybindings-ai|
+6. Git操作...............................|my-keybindings-git|
+7. ウィンドウ・バッファ操作..............|my-keybindings-window|
+8. プラグイン管理........................|my-keybindings-plugin|
+
+==============================================================================
+1. ファイルナビゲーション                                *my-keybindings-file-nav*
+
+1-1 基本操作:~
+    :e {file}           {file}を開く
+    :w                  現在のファイルを保存する
+    <leader>w           現在のファイルを保存する
+    :x                  現在のファイルを保存して閉じる
+    <leader>x           現在のファイルを保存して閉じる
+    :q!                 現在のファイルを保存せず閉じる
+    :q                  現在のウィンドウを閉じる
+    <leader>q           現在のウィンドウを閉じる
+    ZZ                  現在のファイルを保存し、Vimを終了する
+    :term               端末を開く
+    <leader>t           端末を開く
+
+1-2 Telescope（旧Unite）:~
+    ::                  最近使用したファイル（oldfiles）
+    <leader>ff          ファイル検索（find_files）
+    <leader>fg          ファイル内容検索（live_grep）※隠しファイルも検索
+    <leader>fb          バッファ一覧
+    <leader>fr          最近使用したファイル
+    <leader>fa          すべてのファイル検索
+    :@                  コマンド履歴
+    <leader>fh          ヘルプ検索
+    <leader><leader>    Telescopeコマンド一覧
+
+1-3 Neo-tree（旧NERDTree）:~
+    <F2>                Neo-tree切り替え
+    <leader>e           Neo-tree切り替え
+    <leader>y           相対パスをヤンク（Neo-tree内）
+
+Neo-tree内での操作:~
+    Enter / l           子ディレクトリに入る/ファイルを開く
+    u / h / BS          親ディレクトリへ移動
+    .                   現在のディレクトリをルートに設定
+    a                   新規ファイル/ディレクトリ作成
+    d                   削除
+    r                   リネーム
+    y                   ヤンク（コピー）
+    x                   カット
+    p                   ペースト
+    H                   隠しファイルの表示/非表示
+    z                   ディレクトリを展開/折りたたみ
+    R                   リフレッシュ
+    /                   ファイル検索
+    P                   ファイルプレビュー
+
+1-4 ファイル・ディレクトリ作成:~
+    <leader>nf          新規ファイル（パス入力）
+    <leader>nd          新規ディレクトリ
+    <leader>ns          同じディレクトリに新規ファイル
+    <leader>nr          ファイルをリネーム
+    <leader>nD          ファイルを削除
+
+==============================================================================
+2. ファイル内ナビゲーション                           *my-keybindings-in-file-nav*
+
+2-1 基本操作:~
+    gg                  ファイルの先頭に移動する
+    G                   ファイルの末尾に移動する
+    {number}gg          行{number}に移動する
+    /{pattern}          {pattern}を検索する（vim-searchx拡張）
+    n                   検索パターンの次の出現箇所に移動する
+    N                   検索パターンの前の出現箇所に移動する
+    ;                   次の検索結果（searchx）
+    ,                   前の検索結果（searchx）
+    <Esc><Esc>          検索ハイライトをクリア
+    zz                  カーソルのある行を中心にする
+    f{char}             次の{char}に移動する
+    F{char}             前の{char}に移動する
+    ^                   行の先頭に移動する
+    $                   行の末尾に移動する
+    w                   次の単語の先頭に移動する
+    b                   前の単語の先頭に移動する
+    e                   次の単語の末尾に移動する
+
+2-2 Telescope行検索（旧Unite line）:~
+    :<CR>               現在バッファ内検索（current_buffer_fuzzy_find）
+
+2-3 Vista（tagbar代替）:~
+    <F9>                Vista切り替え
+    ]t                  次のトップレベルへ
+    [t                  前のトップレベルへ
+    :Vista finder       Telescopeでシンボル検索
+    :Vf                 Vista finderのショートカット
+
+Vista内での操作:~
+    Enter               シンボルにジャンプ
+    p                   プレビュー
+    j/k                 上下に移動
+    s                   ソート順を切り替え
+    /                   Vista内で検索
+    q                   Vistaを閉じる
+
+2-4 Flash.nvim（旧searchmotion）:~
+    s                   2文字検索ジャンプ
+    S                   Treesitterベースジャンプ
+
+2-5 LSP診断（旧coc.vim）:~
+    ]g                  次のエラー/警告
+    [g                  前のエラー/警告
+
+==============================================================================
+3. 編集                                                    *my-keybindings-edit*
+
+3-1 基本操作:~
+    i                   カーソル前に挿入
+    a                   カーソル後に挿入
+    I                   行頭に挿入
+    A                   行末に挿入
+    u                   アンドゥ
+    Ctrl-r              リドゥ
+    :%s/old/new/g       全置換
+    =                   インデント自動調整
+    <                   インデント減少
+    >                   インデント増加
+
+3-2 GitHub Copilot:~
+    <Tab>               サジェスト受け入れる
+    <C-]>               サジェスト拒否
+    <M-]> (Alt+])       次のサジェスト
+    <M-[> (Alt+[)       前のサジェスト
+    :Copilot setup      初回認証
+    :CopilotAuthWSL     WSL用認証
+
+3-3 nvim-cmp（補完）:~
+    <C-j>               次の候補
+    <C-k>               前の候補
+    <CR>                確定
+    <S-Tab>             確定（互換性）
+    <C-Space>           補完を開始
+    <C-e>               補完を中止
+
+3-4 UndoTree:~
+    <F3>                UndoTree切り替え
+
+3-5 ヤンク履歴（yanky.nvim）:~
+    <leader>uy          ヤンク履歴を表示（旧,uy）
+    <c-n>               次のヤンク履歴
+    <c-p>               前のヤンク履歴
+
+3-6 マクロ:~
+    q{register}         {register}にマクロを記録開始
+    q                   マクロの記録を終了
+    @{register}         {register}のマクロを実行
+
+3-7 外部ファイル実行:~
+    :source {file}      {file}のLua/Vimscriptを実行
+
+3-8 LSPフォーマット（旧coc.vim）:~
+    <leader>f           コードフォーマット
+
+3-9 Comment.nvim（旧Commentary）:~
+    <leader>c           行コメント切り替え
+    gc                  コメント（モーション対応）
+    gb                  ブロックコメント
+
+3-10 Surround操作（nvim-surround）:~
+    ys{motion}{char}    テキストを{char}で囲む
+    cs{old}{new}        {old}を{new}に変更
+    ds{char}            {char}を削除
+    S{char}             選択範囲を{char}で囲む（ビジュアルモード）
+
+==============================================================================
+4. 調査・コード解析                              *my-keybindings-investigate*
+
+4-1 基本操作:~
+    :help {topic}       {topic}に関するヘルプを表示
+    :checkhealth        健全性チェック
+    gf                  カーソル下のファイルを開く
+    gx                  URLをブラウザで開く
+    <C-]>               タグジャンプ
+    <C-t>               タグジャンプから戻る
+
+4-2 LSP機能（旧coc.vim）:~
+    gd                  定義へジャンプ
+    gy                  型定義へ
+    gI                  実装へ
+    gr                  参照一覧（Telescopeで表示）
+    K                   ホバードキュメント
+    <leader>rn          リネーム
+    <leader>ca          コードアクション
+
+4-3 Telescope検索:~
+    <leader>uc          コマンド検索（commands）
+    <leader>um          キーマップ検索（keymaps）
+    <leader>uh          ヘルプ検索（help_tags）
+
+4-4 翻訳（vim-translator）:~
+    :Translate          選択範囲を翻訳
+    <leader>t           翻訳（ノーマル/ビジュアルモード）
+    <leader>tr          翻訳して置換
+
+==============================================================================
+5. AI支援機能                                             *my-keybindings-ai*
+
+5-1 Avante.nvim（OpenAI API使用）:~
+    <leader>aa          AIに質問（AvanteAsk）
+    <leader>ae          選択範囲を編集（AvanteEdit）
+    <leader>at          サイドバー切り替え（AvanteToggle）
+    <leader>ac          チャット開始（AvanteChat）
+    <leader>af          サイドバーにフォーカス（AvanteFocus）
+    <leader>ar          ウィンドウ更新（AvanteRefresh）
+
+Avante差分操作:~
+    co                  自分の変更を選択
+    ct                  AIの変更を選択
+    ca                  すべてのAI変更を適用
+    cb                  両方の変更を保持
+    cc                  カーソル位置の変更を選択
+    ]x                  次の差分
+    [x                  前の差分
+
+5-2 Ollama直接操作:~
+    <leader>oo          Ollamaプロンプト
+    <leader>oG          コード生成
+
+==============================================================================
+6. Git操作                                                  *my-keybindings-git*
+
+6-1 Gitsigns:~
+    ]h                  次の変更箇所
+    [h                  前の変更箇所
+    <leader>hs          変更をステージ
+    <leader>hr          変更をリセット
+    <leader>hS          バッファ全体をステージ
+    <leader>hR          バッファ全体をリセット
+    <leader>hp          変更をプレビュー
+    <leader>hb          行のblame表示
+    <leader>tb          blame表示の切り替え
+
+6-2 Fugitive:~
+    <leader>gs          Git status
+    <leader>gb          Git blame
+    <leader>gd          Git diff
+    <leader>gl          Git log
+    <leader>gc          Git commit
+    <leader>gC          Git commit --amend
+
+==============================================================================
+7. ウィンドウ・バッファ操作                           *my-keybindings-window*
+
+7-1 ウィンドウ:~
+    <C-h/j/k/l>         ウィンドウ間移動
+    <leader>sv          垂直分割
+    <leader>sh          水平分割
+    <C-Up/Down>         ウィンドウ高さ調整
+    <C-Left/Right>      ウィンドウ幅調整
+
+7-2 バッファ:~
+    <S-h>               前のバッファ
+    <S-l>               次のバッファ
+    <leader>bd          バッファを削除
+
+7-3 Quickfix:~
+    ]q                  次のQuickfix項目
+    [q                  前のQuickfix項目
+    <leader>co          Quickfix開く
+    <leader>cc          Quickfix閉じる
+
+==============================================================================
+8. プラグイン管理                                       *my-keybindings-plugin*
+
+8-1 Lazy.nvim:~
+    :Lazy               プラグイン管理UI
+    :Lazy sync          プラグインの同期
+    :Lazy update        プラグインの更新
+    :Lazy clean         不要なプラグインを削除
+
+8-2 Mason（LSP管理）:~
+    :Mason              LSPサーバー管理UI
+
+8-3 特殊コマンド:~
+    :TransparentToggle  透明度切り替え
+    :checkhealth        ヘルスチェック
+    ollama-daemon start Ollamaを起動（ローカルAI用）
+
+==============================================================================
+vim:tw=78:ts=4:ft=help:norl:

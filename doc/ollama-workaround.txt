@@ -1,0 +1,75 @@
+*ollama-workaround.txt*  Ollama + avante.nvim 問題の回避策
+
+==============================================================================
+CONTENTS                                        *ollama-workaround-contents*
+
+1. 問題の説明.................|ollama-workaround-issue|
+2. 回避策....................|ollama-workaround-solutions|
+3. 使用方法..................|ollama-workaround-usage|
+4. キーマップ................|ollama-workaround-keymaps|
+
+==============================================================================
+1. 問題の説明                                    *ollama-workaround-issue*
+
+avante.nvimのeditモードはOllamaのようなオープンソースモデルでは正常に
+動作しません。これは以下の理由によります：
+
+- Ollamaモデルは複雑な差分生成フォーマットを正確に生成できない
+- avante.nvimが期待する特定の応答形式に従えない
+- GitHub issue #2048で既知の問題として報告されている
+
+==============================================================================
+2. 回避策                                    *ollama-workaround-solutions*
+
+以下の3つの回避策を用意しました：
+
+1. **シンプルなOllamaプロンプト** (`ollama.nvim`)
+   - <leader>oo でOllamaに直接質問
+   - <leader>og でコード生成
+   - 応答は別ウィンドウに表示
+
+2. **手動差分確認** (`OllamaDiff`コマンド)
+   - <leader>od で選択範囲の改善を依頼
+   - 差分を新しいタブで表示
+   - <leader>da で適用、<leader>dr で拒否
+
+3. **avante.nvimのaskモード**
+   - <leader>aa で質問（editモードは使わない）
+   - 応答を手動でコピー＆ペースト
+
+==============================================================================
+3. 使用方法                                    *ollama-workaround-usage*
+
+*推奨ワークフロー:*
+
+1. コードを選択してビジュアルモード
+2. <leader>od を押して差分表示
+3. 差分を確認
+4. <leader>da で適用 または <leader>dr で拒否
+
+*シンプルな質問:*
+
+1. <leader>oo を押す
+2. 質問を入力
+3. 応答が別ウィンドウに表示される
+
+==============================================================================
+4. キーマップ                                *ollama-workaround-keymaps*
+
+通常モード:
+  <leader>oo    Ollamaプロンプト
+  <leader>og    コード生成
+  <leader>od    差分表示付き改善
+  <leader>aa    avante.nvimの質問モード
+
+ビジュアルモード:
+  <leader>oo    選択範囲についてOllamaに質問
+  <leader>og    選択範囲のコード生成
+  <leader>od    選択範囲の差分表示付き改善
+
+差分表示中:
+  <leader>da    差分を適用
+  <leader>dr    差分を拒否（タブを閉じる）
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:

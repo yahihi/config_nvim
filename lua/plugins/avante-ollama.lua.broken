@@ -1,0 +1,67 @@
+-- Avante修正版設定
+return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    build = "make",
+    opts = {
+      provider = "ollama",
+      providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "llama3.2:3b",
+          timeout = 30000,
+          max_tokens = 4096,
+          temperature = 0.7,
+          top_p = 0.9,
+          system = "あなたは日本語で回答するプログラミングアシスタントです。すべての回答は日本語で行ってください。コードのコメントも日本語で書いてください。英語で質問されても日本語で回答してください。",
+        },
+      },
+      system_prompt = "あなたは日本語を話すプログラミングアシスタントです。必ず日本語で回答してください。コードの説明、エラーメッセージの解説、提案などもすべて日本語で行ってください。",
+      behaviour = {
+        auto_suggestions = false,
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+      },
+      mappings = {
+        ask = "<leader>aa",
+        edit = "<leader>ae",
+        refresh = "<leader>ar",
+        toggle = {
+          default = "<leader>at",
+          debug = "<leader>ad",
+        },
+      },
+      windows = {
+        wrap = true,
+        width = 30,
+        prompt = {
+          prefix = "🤖 ",
+          start_insert = true,
+        },
+      },
+      dual_boost = {
+        enabled = false,
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+        },
+      },
+    },
+  },
+}
