@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load core configurations
+require("config.platform").setup()  -- Platform-specific setup
 require("config.options")
 require("config.autocmds")
 require("config.keymaps")

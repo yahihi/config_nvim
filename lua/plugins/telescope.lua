@@ -94,9 +94,8 @@ return {
         },
         pickers = {
           find_files = {
-            -- Ubuntu/Debianでfdfindを使用する設定
-            -- strip-cwd-prefixオプションを追加して相対パスで出力
-            find_command = { 'fdfind', '--type', 'f', '--strip-cwd-prefix', '--hidden', '--exclude', '.git' },
+            -- プラットフォーム別のfindコマンドを使用
+            find_command = require("config.platform").get_find_command(),
             hidden = true,  -- 隠しファイルも表示
           },
           live_grep = {

@@ -3,10 +3,10 @@
 このファイルは、Claudeとの継続的な相談のためのコンテキスト情報です。
 
 ## 現在の環境
-- **OS**: WSL2 (Ubuntu)
+- **OS**: クロスプラットフォーム対応（Linux/macOS/Windows/WSL）
 - **Neovim**: 最新版
 - **プラグインマネージャー**: lazy.nvim
-- **パッケージマネージャー**: apt (fdはfdfindとしてインストール)
+- **自動検出**: OS別のコマンドを自動選択（fd/fdfind/fd.exe）
 
 ## 主要な設定構造
 ```
