@@ -12,7 +12,8 @@ return {
         end,
       },
     },
-    cmd = "Telescope",
+    cmd = { "Telescope", "TelescopeLspMenu" },
+    event = "VeryLazy",
     keys = {
       { "::", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -117,6 +118,69 @@ return {
       
       -- Load extensions
       telescope.load_extension("fzf")
+      
+      -- LSPナビゲーションメニュー
+      local pickers = require("telescope.pickers")
+      local finders = require("telescope.finders")
+      local conf = require("telescope.config").values
+      local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
+      
+      local function telescope_lsp_menu(opts)
+        opts = opts or {}
+        
+        local menu_items = {
+          { name = "定義へジャンプ (gd)", action = "definition", icon = "󰊕 " },
+          { name = "宣言へジャンプ (gD)", action = "declaration", icon = "󰊕 " },
+          { name = "参照一覧 (gr)", action = "references", icon = " " },
+          { name = "実装へジャンプ (gI)", action = "implementation", icon = "󰡱 " },
+          { name = "ホバー表示 (K)", action = "hover", icon = " " },
+          { name = "型定義へジャンプ (gy)", action = "type_definition", icon = " " },
+        }
+        
+        pickers.new(opts, {
+          prompt_title = "LSP Navigation",
+          finder = finders.new_table({
+            results = menu_items,
+            entry_maker = function(entry)
+              return {
+                value = entry,
+                display = entry.icon .. entry.name,
+                ordinal = entry.name,
+              }
+            end,
+          }),
+          sorter = conf.generic_sorter(opts),
+          attach_mappings = function(prompt_bufnr, map)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              if selection then
+                local action = selection.value.action
+                
+                if action == "definition" then
+                  vim.lsp.buf.definition()
+                elseif action == "declaration" then
+                  vim.lsp.buf.declaration()
+                elseif action == "references" then
+                  vim.lsp.buf.references()
+                elseif action == "implementation" then
+                  vim.lsp.buf.implementation()
+                elseif action == "hover" then
+                  vim.lsp.buf.hover()
+                elseif action == "type_definition" then
+                  vim.lsp.buf.type_definition()
+                end
+              end
+            end)
+            return true
+          end,
+        }):find()
+      end
+      
+      vim.api.nvim_create_user_command("TelescopeLspMenu", function()
+        telescope_lsp_menu()
+      end, {})
     end,
   },
 }

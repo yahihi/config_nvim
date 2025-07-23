@@ -77,6 +77,11 @@ keymap("n", "[q", ":cprev<CR>", opts)
 keymap("n", "<C-]>", "<C-]>", opts)
 keymap("n", "<C-t>", "<C-t>", opts)
 
+-- LSP navigation menu with Telescope
+keymap("n", "<leader>ln", ":TelescopeLspMenu<CR>", { noremap = true, silent = true, desc = "LSP navigation menu" })
+keymap("v", "<leader>ln", "<Esc>:TelescopeLspMenu<CR>", { noremap = true, silent = true, desc = "LSP navigation menu" })
+
+
 -- Help navigation
 keymap("n", "gf", "gf", opts)
 keymap("n", "gx", "gx", opts)

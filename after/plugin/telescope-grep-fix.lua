@@ -17,4 +17,4 @@ vim.keymap.set('n', '<leader>fG', function()
   })
 end, { desc = 'Live Grep (all files)' })
 
-print("✅ live_grepキーマップを修正しました")
+-- print("✅ live_grepキーマップを修正しました")

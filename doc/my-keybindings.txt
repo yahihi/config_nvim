@@ -190,13 +190,15 @@ Vista内での操作:~
     <C-t>               タグジャンプから戻る
 
 4-2 LSP機能（旧coc.vim）:~
-    gd                  定義へジャンプ
+    gd                  定義へジャンプ（Telescopeで表示）
     gy                  型定義へ
     gI                  実装へ
     gr                  参照一覧（Telescopeで表示）
     K                   ホバードキュメント
     <leader>rn          リネーム
     <leader>ca          コードアクション
+    <leader>ln          LSPナビゲーションメニュー（利用可能な機能を表示）
+    :ToggleLspTelescope Telescope/Quickfixの切り替え
 
 4-3 Telescope検索:~
     <leader>uc          コマンド検索（commands）
@@ -274,6 +276,10 @@ Avante差分操作:~
     [q                  前のQuickfix項目
     <leader>co          Quickfix開く
     <leader>cc          Quickfix閉じる
+
+Quickfix内での操作:~
+    Enter / o           項目にジャンプして閉じる
+    p                   項目をプレビュー（閉じない）
 
 ==============================================================================
 8. プラグイン管理                                       *my-keybindings-plugin*
