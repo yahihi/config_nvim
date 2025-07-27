@@ -18,6 +18,7 @@ require("config.platform").setup()  -- Platform-specific setup
 require("config.options")
 require("config.autocmds")
 require("config.keymaps")
+require("config.neovide")  -- Neovide-specific settings
 
 -- Load plugins
 require("lazy").setup("plugins", {
