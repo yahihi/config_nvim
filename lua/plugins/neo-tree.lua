@@ -104,14 +104,17 @@ return {
             ["<"] = "prev_source",
             [">"] = "next_source",
             ["i"] = "show_file_details",
-            ["<leader>y"] = function(state)
-              local node = state.tree:get_node()
-              local path = node:get_id()
-              local cwd = vim.fn.getcwd()
-              local relative_path = vim.fn.fnamemodify(path, ":~:.")
-              vim.fn.setreg("+", relative_path)
-              vim.notify("Yanked: " .. relative_path)
-            end,
+            ["<leader>y"] = {
+              function(state)
+                local node = state.tree:get_node()
+                local path = node:get_id()
+                local cwd = vim.fn.getcwd()
+                local relative_path = vim.fn.fnamemodify(path, ":~:.")
+                vim.fn.setreg("+", relative_path)
+                vim.notify("Yanked: " .. relative_path)
+              end,
+              desc = "copy relative path",
+            },
           },
         },
         filesystem = {

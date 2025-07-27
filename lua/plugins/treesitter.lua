@@ -12,6 +12,20 @@ return {
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     config = function()
+      -- Windows環境でのコンパイラ設定
+      if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+        -- zigがインストールされている場合は使用
+        if vim.fn.executable("zig") == 1 then
+          require("nvim-treesitter.install").compilers = { "zig" }
+        -- gccがインストールされている場合は使用
+        elseif vim.fn.executable("gcc") == 1 then
+          require("nvim-treesitter.install").compilers = { "gcc" }
+        -- clangがインストールされている場合は使用
+        elseif vim.fn.executable("clang") == 1 then
+          require("nvim-treesitter.install").compilers = { "clang" }
+        end
+      end
+
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",

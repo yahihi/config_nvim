@@ -23,7 +23,7 @@ return {
       { "<leader>fa", "<cmd>Telescope find_files<cr>", desc = "All Files" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
       { ":<CR>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer Search" },
-      { ":@", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { ":@", function() require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Find files from current directory" },
       -- Unite-like commands
       { "<leader>uc", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>um", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
