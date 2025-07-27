@@ -21,7 +21,12 @@ return {
       },
       modes = {
         search = {
-          enabled = false,
+          enabled = true,
+          highlight = { backdrop = false },
+          jump = { history = true, register = true, nohlsearch = true },
+          search = {
+            incremental = true,
+          },
         },
         char = {
           enabled = true,
