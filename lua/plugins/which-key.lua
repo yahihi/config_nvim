@@ -18,7 +18,7 @@ return {
         { "<leader>h", group = "hunk" },
         { "<leader>l", group = "lsp" },
         { "<leader>s", group = "search" },
-        { "<leader>t", group = "toggle" },
+        { "<leader>t", group = "translate/terminal" },
         { "<leader>n", group = "new" },
         { "<leader>r", group = "rename/reload" },
         { "<leader>c", group = "code" },

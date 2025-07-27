@@ -31,6 +31,16 @@ sudo apt install -y neovim
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 
+# Neovim用のNode.jsプロバイダー（オプション）
+npm install -g neovim
+
+# Python用pynvim（オプション）
+# macOS/最新のLinuxでは専用仮想環境が必須
+python3 -m venv ~/.config/nvim/pynvim-env
+~/.config/nvim/pynvim-env/bin/pip install pynvim
+
+# 注: 設定ファイルで自動的にこの環境を使用するよう設定済み
+
 # 確認
 nvim --version  # 0.9.0以上
 node --version  # v16以上
@@ -124,6 +134,22 @@ echo 'export OPENAI_API_KEY="dummy"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
+#### Python仮想環境を使っている場合
+
+Neovim専用のPython環境を作成し、設定ファイルで指定：
+
+```lua
+-- lua/config/options.luaに追加
+-- システムPythonを使う場合
+vim.g.python3_host_prog = '/usr/bin/python3'
+
+-- または専用仮想環境を使う場合
+vim.g.python3_host_prog = vim.fn.expand('~/.config/nvim/pynvim-env/bin/python')
+```
+
+これにより、他の仮想環境に影響されずに
+Neovimが常に同じPython環境を使用します
+
 ### ステップ9: カスタムヘルプの有効化
 
 ```vim
@@ -142,6 +168,10 @@ source ~/.bashrc
 ```bash
 # Homebrew経由
 brew install neovim ripgrep node fd
+
+# Neovim用のプロバイダー（オプション）
+npm install -g neovim
+pip3 install -U pynvim
 
 # フォント
 brew tap homebrew/cask-fonts

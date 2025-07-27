@@ -1,6 +1,7 @@
 return {
   {
     "github/copilot.vim",
+    cmd = { "Copilot", "CopilotAuth", "CopilotAuthWSL", "CopilotStatus", "CopilotSetupGuide" },
     event = "InsertEnter",
     config = function()
       -- Disable default mappings

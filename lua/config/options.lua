@@ -1,6 +1,9 @@
 -- Basic editor options
 local opt = vim.opt
 
+-- Python3 provider
+vim.g.python3_host_prog = vim.fn.expand('~/.config/nvim/pynvim-env/bin/python')
+
 -- Encoding
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"

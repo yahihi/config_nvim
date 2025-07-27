@@ -62,7 +62,7 @@ keymap("i", "<C-k>", "<Up>", opts)
 keymap("i", "<C-l>", "<Right>", opts)
 
 -- Terminal
-keymap("n", "<leader>t", ":terminal<CR>", opts)
+keymap("n", "<leader>tt", ":terminal<CR>", opts)
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
 
 -- Quick fix
@@ -101,8 +101,7 @@ keymap("n", "<leader>gs", ":Git<CR>", opts)
 keymap("n", "<leader>gb", ":Git blame<CR>", opts)
 
 -- Translate (requires vim-translator plugin)
-keymap("n", "<leader>t", ":Translate<CR>", opts)
-keymap("v", "<leader>t", ":Translate<CR>", opts)
+-- Translator plugin handles <leader>t mappings
 
 -- Avante (fallback mappings)
 keymap("n", "<leader>ae", ":AvanteEdit<CR>", opts)
