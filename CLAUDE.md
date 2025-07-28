@@ -2,6 +2,8 @@
 
 このファイルは、Claudeとの継続的な相談のためのコンテキスト情報です。
 
+#CLAUDE.local.md
+
 ## 現在の環境
 - **OS**: クロスプラットフォーム対応（Linux/macOS/Windows/WSL）
 - **Neovim**: 最新版

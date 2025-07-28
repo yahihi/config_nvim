@@ -33,6 +33,7 @@ Thumbs.db
 # 個人設定
 personal/
 local/
+CLAUDE.local.md
 
 # 一時ファイル
 tmp/
