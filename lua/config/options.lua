@@ -17,6 +17,7 @@ opt.swapfile = false
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
+opt.cursorcolumn = true
 opt.signcolumn = "yes"
 opt.wrap = false
 opt.scrolloff = 8
