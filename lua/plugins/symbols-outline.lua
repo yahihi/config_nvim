@@ -2,6 +2,7 @@
 return {
   {
     "simrat39/symbols-outline.nvim",
+    enabled = false,  -- Aerial.nvimを使用するため無効化
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
     keys = {
       { "<F9>", "<cmd>SymbolsOutline<cr>", desc = "Toggle symbols outline" },
