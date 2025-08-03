@@ -4,9 +4,6 @@ return {
     cmd = { "Copilot", "CopilotAuth", "CopilotAuthWSL", "CopilotStatus", "CopilotSetupGuide" },
     event = "InsertEnter",
     config = function()
-      -- Disable default mappings
-      vim.g.copilot_no_tab_map = true
-      
       -- Custom mappings
       vim.keymap.set("i", "<Tab>", 'copilot#Accept("\\<Tab>")', {
         expr = true,
@@ -14,8 +11,15 @@ return {
         silent = true,
       })
       vim.keymap.set("i", "<C-]>", "<Plug>(copilot-dismiss)", { silent = true })
+      vim.keymap.set("i", "<C-Left>", "<Plug>(copilot-dismiss)", { silent = true })
       vim.keymap.set("i", "<M-]>", "<Plug>(copilot-next)", { silent = true })
       vim.keymap.set("i", "<M-[>", "<Plug>(copilot-previous)", { silent = true })
+      vim.keymap.set("i", "<C-Down>", "<Plug>(copilot-next)", { silent = true })
+      vim.keymap.set("i", "<C-Up>", "<Plug>(copilot-previous)", { silent = true })
+      
+      -- Partial accept mappings
+      vim.keymap.set("i", "<C-Right>", "<Plug>(copilot-accept-word)", { silent = true })
+      vim.keymap.set("i", "<C-S-Right>", "<Plug>(copilot-accept-line)", { silent = true })
       
       -- WSL specific authentication command
       vim.cmd([[

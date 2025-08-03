@@ -164,6 +164,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -171,14 +173,10 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
           ["<S-Tab>"] = cmp.mapping.confirm({ select = true }),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            if luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
-            elseif check_backspace() then
-              fallback()
             else
-              cmp.complete()
+              fallback()
             end
           end, { "i", "s" }),
         }),

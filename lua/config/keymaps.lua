@@ -61,6 +61,33 @@ keymap("i", "<C-j>", "<Down>", opts)
 keymap("i", "<C-k>", "<Up>", opts)
 keymap("i", "<C-l>", "<Right>", opts)
 
+-- Smart line navigation
+keymap({"n", "v"}, "<Left>", function()
+  local col = vim.fn.col('.')
+  if col == 1 then
+    local line = vim.fn.line('.')
+    if line > 1 then
+      vim.cmd('normal! k$')
+    end
+  else
+    vim.cmd('normal! h')
+  end
+end, opts)
+
+keymap({"n", "v"}, "<Right>", function()
+  local col = vim.fn.col('.')
+  local line_len = #vim.fn.getline('.')
+  if col >= line_len then
+    local line = vim.fn.line('.')
+    local last_line = vim.fn.line('$')
+    if line < last_line then
+      vim.cmd('normal! j0')
+    end
+  else
+    vim.cmd('normal! l')
+  end
+end, opts)
+
 -- Terminal
 keymap("n", "<leader>tt", ":terminal<CR>", opts)
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
