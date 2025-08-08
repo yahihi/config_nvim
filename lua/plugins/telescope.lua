@@ -31,6 +31,10 @@ return {
       -- Telescope builtin picker
       { "<leader><leader>", function() require("telescope.builtin").builtin() end, desc = "Telescope Builtin" },
       { "<leader>ft", function() require("telescope.builtin").builtin() end, desc = "Telescope Builtin" },
+      -- 全コマンド一覧
+      { ":;", "<cmd>Telescope commands<cr>", desc = "All Commands" },
+      -- コマンドヒストリー
+      { ";;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     },
     config = function()
       local telescope = require("telescope")

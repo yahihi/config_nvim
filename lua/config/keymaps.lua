@@ -141,3 +141,9 @@ keymap("n", "<leader>ar", ":AvanteRefresh<CR>", opts)
 
 -- F4でAvanteトグル
 keymap("n", "<F4>", ":AvanteToggle<CR>", opts)
+
+-- Telescope all commands
+keymap("n", ":;", ":Telescope commands<CR>", opts)
+
+-- Telescope command history
+keymap("n", ";;", ":Telescope command_history<CR>", opts)

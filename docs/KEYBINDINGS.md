@@ -9,6 +9,8 @@
 - `<leader>fb` - バッファ一覧
 - `<leader>fr` - 最近使ったファイル
 - `<leader><leader>` - Telescopeコマンド一覧
+- `:;` - 全コマンド一覧（Telescope）
+- `;;` - コマンド履歴（Telescope）
 
 ## AI支援 (avante.nvim)
 - `<F4>` - AIサイドバーのトグル

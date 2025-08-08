@@ -37,9 +37,11 @@
     <leader>fb          バッファ一覧
     <leader>fr          最近使用したファイル
     <leader>fa          すべてのファイル検索
-    :@                  コマンド履歴
+    :@                  現在ディレクトリからファイル検索
     <leader>fh          ヘルプ検索
     <leader><leader>    Telescopeコマンド一覧
+    :;                  全コマンド一覧（commands）
+    ;;                  コマンド履歴（command_history）
 
 1-3 Neo-tree（旧NERDTree）:~
     <F2>                Neo-tree切り替え
