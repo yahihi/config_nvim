@@ -4,6 +4,9 @@ local opt = vim.opt
 -- Python3 provider
 vim.g.python3_host_prog = vim.fn.expand('~/.config/nvim/pynvim-env/bin/python')
 
+-- Disable only unused provider for faster startup
+vim.g.loaded_perl_provider = 0
+
 -- Encoding
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
