@@ -12,6 +12,18 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Window navigation with arrow keys (for consistency with terminal mode)
+keymap("n", "<C-w><Left>", "<C-w>h", opts)
+keymap("n", "<C-w><Down>", "<C-w>j", opts)
+keymap("n", "<C-w><Up>", "<C-w>k", opts)
+keymap("n", "<C-w><Right>", "<C-w>l", opts)
+
+-- Window navigation from insert mode
+keymap("i", "<C-w><Left>", "<C-\\><C-n><C-w>h", opts)
+keymap("i", "<C-w><Down>", "<C-\\><C-n><C-w>j", opts)
+keymap("i", "<C-w><Up>", "<C-\\><C-n><C-w>k", opts)
+keymap("i", "<C-w><Right>", "<C-\\><C-n><C-w>l", opts)
+
 -- Resize windows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
@@ -91,6 +103,15 @@ end, opts)
 -- Terminal
 keymap("n", "<leader>tt", ":terminal<CR>", opts)
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
+-- Claude Code環境でESCが効かない場合の代替キー
+keymap("t", "jj", "<C-\\><C-n>", opts)
+keymap("t", "<C-[>", "<C-\\><C-n>", opts)
+
+-- Claude Code: ターミナルモードから矢印キーでウィンドウ移動
+keymap("t", "<C-w><Left>", "<C-\\><C-n><C-w>h", opts)
+keymap("t", "<C-w><Down>", "<C-\\><C-n><C-w>j", opts)
+keymap("t", "<C-w><Up>", "<C-\\><C-n><C-w>k", opts)
+keymap("t", "<C-w><Right>", "<C-\\><C-n><C-w>l", opts)
 
 -- Quick fix
 keymap("n", "<leader>co", ":copen<CR>", opts)
