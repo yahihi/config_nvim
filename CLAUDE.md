@@ -32,11 +32,17 @@
 - **live_grep**: `additional_args = { "--hidden" }`が必要
 - キーマップ: `<leader>ff`, `<leader>fg`
 
-### AI支援 (avante.nvim)
-- **プロバイダー**: OpenAI API (gpt-4o-mini)
-- **環境変数**: `OPENAI_API_KEY`（Fishシェル）
+### AI支援
+#### avante.nvim
+- **プロバイダー**: Gemini API (gemini-1.5-flash・無料プラン)
+- **環境変数**: `GEMINI_API_KEY`（Fishシェル）
 - **サイドバー**: `<F4>`でトグル
 - **キーマップ**: `<leader>ae`（編集）, `<leader>aa`（質問）
+
+#### Claude Code (MCP統合)
+- **用途**: コードベース全体の理解と大規模リファクタリング
+- **設定**: MCP (Model Context Protocol) を通じて統合
+- **利点**: ファイル横断的な編集、プロジェクト全体の把握
 
 ### エディタ設定
 - **リーダーキー**: `<Space>`
@@ -88,5 +94,9 @@ A: `lua/plugins/lsp.lua`の`ensure_installed`に追加
 3. 設定変更前は必ずバックアップを取ってください
 
 ## 最終更新
+- 2025年8月
+  - キーマップの拡充とヘルプドキュメントの更新
+  - MCP統合とSnacksプラグインを追加
+  - symbols-outlineからaerial.nvimへ移行
+  - searchxからflash.nvimへ移行
 - 2024年7月（完全復旧完了）
-- すべての機能が正常動作することを確認済み

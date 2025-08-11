@@ -28,6 +28,9 @@ require("lazy").setup("plugins", {
   install = {
     colorscheme = { "tokyonight" },
   },
+  rocks = {
+    enabled = false,  -- luarocksサポートを無効化
+  },
   performance = {
     rtp = {
       disabled_plugins = {

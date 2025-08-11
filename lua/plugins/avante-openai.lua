@@ -1,4 +1,4 @@
--- OpenAI API設定のavante.nvim（MCP統合付き）
+-- Gemini API設定のavante.nvim（MCP統合付き）
 return {
   {
     "yetone/avante.nvim",
@@ -13,17 +13,14 @@ return {
       end)
       
       return {
-        provider = "openai",
+        provider = "gemini",
         providers = {
-          openai = {
-            endpoint = "https://api.openai.com/v1",
-            model = "gpt-4o-mini",  -- または "gpt-3.5-turbo", "gpt-4o"
+          gemini = {
+            model = "gemini-1.5-flash",  -- 無料プランで使用可能
             timeout = 30000,
-            extra_request_body = {
-              temperature = 0.7,
-              max_tokens = 4096,
-            },
-            -- APIキーは環境変数から読み込まれます: OPENAI_API_KEY
+            temperature = 0.7,
+            max_tokens = 4096,
+            -- APIキーは環境変数から読み込まれます: GEMINI_API_KEY または AVANTE_GEMINI_API_KEY
           },
         },
         behaviour = {
