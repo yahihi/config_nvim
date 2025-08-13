@@ -17,8 +17,8 @@ return {
           -- LM Studio設定 (OpenAI互換API)
           lmstudio = {
             __inherited_from = "openai",  -- OpenAIプロバイダーを継承
-            endpoint = "http://192.168.50.57:1234/v1",
-            model = "openai/gpt-oss-20b",
+            endpoint = vim.env.LMSTUDIO_ENDPOINT or "http://localhost:1234/v1",  -- 環境変数で設定可能
+            model = vim.env.LMSTUDIO_MODEL or "openai/gpt-oss-20b",
             timeout = 30000,
             parse_api_key = function() return "dummy" end,  -- LM Studioではダミー値を返す
             extra_request_body = {
