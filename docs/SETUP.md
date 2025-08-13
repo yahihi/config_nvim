@@ -16,8 +16,10 @@ sudo apt install -y \
   gcc \
   g++ \
   make \
+  build-essential \
   unzip \
   ripgrep \
+  fd-find \
   python3 \
   python3-pip \
   python3-venv
@@ -30,6 +32,15 @@ sudo apt install -y neovim
 # Node.js (LSP用)
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
+
+# Windows側のツール（WSL2でIME自動制御を使う場合）
+# PowerShellを管理者として実行:
+# Scoopのインストール
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+# zenhan.exeのインストール（IME自動制御用）
+scoop install zenhan
 
 # Neovim用のNode.jsプロバイダー（オプション）
 npm install -g neovim
@@ -103,7 +114,12 @@ nvim
 
 ### ステップ7: AI機能のセットアップ
 
-#### Ollama（推奨・無料）
+#### LM Studio（推奨・無料・ローカルLLM）
+1. [LM Studio](https://lmstudio.ai/)をダウンロード・インストール
+2. モデルをダウンロード（推奨: gpt-oss-20b, Qwen3等）
+3. サーバーを起動（デフォルト: http://localhost:1234）
+
+#### Ollama（無料・ローカルLLM）
 ```bash
 # インストール
 curl -fsSL https://ollama.com/install.sh | sh
@@ -121,16 +137,38 @@ ollama pull codellama:7b
 " ブラウザで認証
 ```
 
-### ステップ8: 環境変数の設定（オプション）
+### ステップ8: 環境変数の設定
 
+#### .envファイルで設定（推奨）
+```bash
+# ~/.config/nvim/.envを作成
+cat > ~/.config/nvim/.env << 'EOF'
+# AI支援の設定
+AVANTE_PROVIDER=lmstudio  # または openai
+
+# LM Studio設定（ローカルLLM使用時）
+LMSTUDIO_ENDPOINT=http://localhost:1234/v1
+LMSTUDIO_MODEL=openai/gpt-oss-20b
+
+# OpenAI API設定（OpenAI使用時）
+# OPENAI_API_KEY=your-api-key-here
+
+# Gemini API設定（オプション）
+# GEMINI_API_KEY=your-gemini-api-key
+EOF
+```
+
+#### シェル設定で環境変数を設定（オプション）
 ```bash
 # ~/.bashrcまたは~/.zshrcに追加
 
 # fishの場合
-echo 'set -x OPENAI_API_KEY "dummy"' >> ~/.config/fish/config.fish
+echo 'set -x AVANTE_PROVIDER lmstudio' >> ~/.config/fish/config.fish
+echo 'set -x LMSTUDIO_ENDPOINT "http://localhost:1234/v1"' >> ~/.config/fish/config.fish
 
 # bashの場合
-echo 'export OPENAI_API_KEY="dummy"' >> ~/.bashrc
+echo 'export AVANTE_PROVIDER=lmstudio' >> ~/.bashrc
+echo 'export LMSTUDIO_ENDPOINT="http://localhost:1234/v1"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -172,6 +210,9 @@ brew install neovim ripgrep node fd
 # Neovim用のプロバイダー（オプション）
 npm install -g neovim
 pip3 install -U pynvim
+
+# IME自動制御用（オプション）
+brew install im-select
 
 # フォント
 brew tap homebrew/cask-fonts

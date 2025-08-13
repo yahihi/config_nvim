@@ -13,6 +13,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Load .env file if exists
+local env_file = vim.fn.stdpath("config") .. "/.env"
+if vim.fn.filereadable(env_file) == 1 then
+  for line in io.lines(env_file) do
+    -- コメント行と空行をスキップ
+    if not line:match("^#") and line ~= "" then
+      local key, value = line:match("^([^=]+)=(.+)$")
+      if key and value then
+        -- クォートを除去
+        value = value:gsub("^['\"]", ""):gsub("['\"]$", "")
+        vim.env[key] = value
+      end
+    end
+  end
+end
+
 -- Load core configurations
 require("config.platform").setup()  -- Platform-specific setup
 require("config.options")
