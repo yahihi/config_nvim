@@ -13,7 +13,7 @@ if vim.g.neovide then
   end
   
   -- 透明度設定（0.0〜1.0）- v0.15から変更
-  vim.g.neovide_opacity = 0.95
+  vim.g.neovide_opacity = 0.8
   
   -- カーソルアニメーション
   vim.g.neovide_cursor_animation_length = 0.13
