@@ -105,6 +105,8 @@ Neo-tree内での操作:~
     w                   次の単語の先頭に移動する
     b                   前の単語の先頭に移動する
     e                   次の単語の末尾に移動する
+    {                   前の段落へ移動する
+    }                   次の段落へ移動する
     
 スマートライン移動（行を跨ぐ矢印キー）:~
     <Left>              左へ移動（行頭なら前行末へ）
@@ -113,20 +115,17 @@ Neo-tree内での操作:~
 2-2 Telescope行検索（旧Unite line）:~
     :<CR>               現在バッファ内検索（current_buffer_fuzzy_find）
 
-2-3 Vista（tagbar代替）:~
-    <F9>                Vista切り替え
-    ]t                  次のトップレベルへ
-    [t                  前のトップレベルへ
-    :Vista finder       Telescopeでシンボル検索
-    :Vf                 Vista finderのショートカット
+2-3 Aerial（シンボルアウトライン）:~
+    <F9>                Aerial切り替え
+    [s                  前のシンボルへ
+    ]s                  次のシンボルへ
 
-Vista内での操作:~
+Aerial内での操作:~
     Enter               シンボルにジャンプ
     p                   プレビュー
     j/k                 上下に移動
-    s                   ソート順を切り替え
-    /                   Vista内で検索
-    q                   Vistaを閉じる
+    o/za                ツリーの開閉
+    q                   Aerialを閉じる
 
 2-4 Flash.nvim（旧searchmotion）:~
     s                   2文字検索ジャンプ

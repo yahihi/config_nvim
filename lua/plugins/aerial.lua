@@ -5,8 +5,8 @@ return {
     cmd = { "AerialToggle", "AerialOpen" },
     keys = {
       { "<F9>", "<cmd>AerialToggle<cr>", desc = "Toggle code outline" },
-      { "{", "<cmd>AerialPrev<cr>", desc = "Previous symbol" },
-      { "}", "<cmd>AerialNext<cr>", desc = "Next symbol" },
+      { "[s", "<cmd>AerialPrev<cr>", desc = "Previous symbol" },
+      { "]s", "<cmd>AerialNext<cr>", desc = "Next symbol" },
     },
     opts = {
       -- Treesitterを優先、フォールバックとしてLSP
@@ -85,8 +85,8 @@ return {
         ["p"] = "actions.scroll",
         ["<C-j>"] = "actions.down_and_scroll",
         ["<C-k>"] = "actions.up_and_scroll",
-        ["{"] = "actions.prev",
-        ["}"] = "actions.next",
+        ["[s"] = "actions.prev",
+        ["]s"] = "actions.next",
         ["[["] = "actions.prev_up",
         ["]]"] = "actions.next_up",
         ["q"] = "actions.close",
